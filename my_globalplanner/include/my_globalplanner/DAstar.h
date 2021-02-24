@@ -24,7 +24,7 @@ namespace My_Globalplanner {
 
     struct greater1
     {
-        bool operator()(const Index& a, const Index& b){
+        bool operator()(const Node& a, const Node& b){
             return a.cost > b.cost;
         }
     };
@@ -102,7 +102,7 @@ namespace My_Globalplanner {
         std::string frame_id_;
         unsigned char *costs;
         costmap_2d::Costmap2DROS* costmap_ros_;
-	    costmap_2d::Costmap2D* costmap_;
+	costmap_2d::Costmap2D* costmap_;
     };
   
 }
