@@ -11,7 +11,8 @@
 
 #define MAX_INIT 1.0e10
 
-namespace My_Globalplanner {
+namespace my_globalplanner {
+
     class Node {
     public:
         Node(int a, int b){
@@ -29,9 +30,9 @@ namespace My_Globalplanner {
         }
     };
 
-    class DAstar : nav_core::BaseGlobalPlanner
+    class DAstar : public nav_core::BaseGlobalPlanner
     {
-    private:
+    public:
         std::vector<Node> queue_, dequeue_; 
 
     public:
@@ -44,7 +45,7 @@ namespace My_Globalplanner {
        * @param  name The name of this planner
        * @param  costmap_ros A pointer to the ROS wrapper of the costmap to use for planning
        */
-        void initalilze(std::string name, costmap_2d::Costmap2DROS* costmap_ros);
+        void initialize(std::string name, costmap_2d::Costmap2DROS* costmap_ros);
 
         /**
        * @brief Given a goal pose in the world, compute a plan
@@ -64,7 +65,7 @@ namespace My_Globalplanner {
        * @param plan The plan... filled by the planner
        * @param index The coincident index in the double paths
        */
-        void getPlan(vector<int> camefrom, vector<int> decamefrom, int start_i, int goal_i
+        void getPlan1(std::vector<int> camefrom, std::vector<int> decamefrom, int start_i, int goal_i,
             std::vector<geometry_msgs::PoseStamped>& plan, int index);
 
         /**
@@ -75,7 +76,7 @@ namespace My_Globalplanner {
        * @param goal_i The index that goal pose transfromed in map
        * @param plan The plan... filled by the planner
        */
-        void getPlan(vector<int> camefrom, vector<int> decamefrom, int start_i, int goal_i
+        void getPlan(std::vector<int> camefrom, std::vector<int> decamefrom, int start_i, int goal_i,
             std::vector<geometry_msgs::PoseStamped>& plan);
 
         /**
@@ -85,12 +86,10 @@ namespace My_Globalplanner {
        * @param goal_i The index that goal pose transfromed in map
        * @param judge 1-positive direction; 0-opposite direction
        */
-        void addNeigbors(vector<int>& camefrom, vector<float>& gcost, int i, int goal_i, int judge);
-
+        void addNeigbors(std::vector<int>& camefrom, std::vector<float>& gcost, int i, int goal_i, int judge);
+	
         double getGcost(int i, int next_i);
-
         double getHcost(int next_i, int goal_i);
-
         void publishPlan(const std::vector<geometry_msgs::PoseStamped>& path);
 
         unsigned char lethal_cost_; 
@@ -104,6 +103,6 @@ namespace My_Globalplanner {
         costmap_2d::Costmap2DROS* costmap_ros_;
 	costmap_2d::Costmap2D* costmap_;
     };
-  
-}
+
+}  
 #endif
