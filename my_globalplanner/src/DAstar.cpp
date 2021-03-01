@@ -3,9 +3,9 @@
 #include <pluginlib/class_list_macros.h>
 
 // register as a plugin
-PLUGINLIB_EXPORT_CLASS(My_Globalplanner::DAstar, nav_core::BaseGlobalPlanner)
+PLUGINLIB_EXPORT_CLASS(my_globalplanner::DAstar, nav_core::BaseGlobalPlanner)
 
-namespace My_Globalplanner{
+namespace my_globalplanner{
     DAstar::DAstar() : lethal_cost_(253), costmap_ros_(NULL), initialized_(false) {};
 
     DAstar::DAstar(std::string name, costmap_2d::Costmap2DROS* costmap_ros) : lethal_cost_(253), costmap_ros_(NULL), initialized_(false) {
